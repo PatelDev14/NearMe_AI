@@ -3,7 +3,6 @@
 *.log
 *.pyc
 *.swp
-.DS_Store
 .atom/
 .build/
 .buildlog/
@@ -11,6 +10,14 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+
+# Node related
+node_modules/
+.env
+npm-debug.log
+.DS_Store
+mock-backend/node_modules/
+mock-backend/.env
 
 # IntelliJ related
 *.iml
