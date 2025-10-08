@@ -1,69 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class AnimatedBackground extends StatefulWidget {
-//   const AnimatedBackground({super.key});
-
-//   @override
-//   State<AnimatedBackground> createState() => _AnimatedBackgroundState();
-// }
-
-// class _AnimatedBackgroundState extends State<AnimatedBackground>
-//     with SingleTickerProviderStateMixin {
-//   late final AnimationController _ctrl;
-//   static const _duration = Duration(seconds: 8);
-
-//   final List<List<Color>> _gradients = [
-//     [Color(0xFF0F2027), Color(0xFF2C5364)],
-//     [Color(0xFF3A1C71), Color(0xFFD76D77)],
-//     [Color(0xFF00C9FF), Color(0xFF92FE9D)],
-//   ];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _ctrl = AnimationController(vsync: this, duration: _duration)..repeat();
-//   }
-
-//   @override
-//   void dispose() {
-//     _ctrl.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Positioned.fill(
-//       child: AnimatedBuilder(
-//         animation: _ctrl,
-//         builder: (context, child) {
-//           // compute indices & local t between them
-//           final t = _ctrl.value * (_gradients.length);
-//           final index = t.floor() % _gradients.length;
-//           final next = (index + 1) % _gradients.length;
-//           final localT = t - t.floor();
-
-//           final c1 = Color.lerp(_gradients[index][0], _gradients[next][0], localT)!;
-//           final c2 = Color.lerp(_gradients[index][1], _gradients[next][1], localT)!;
-
-//           return Container(
-//             decoration: BoxDecoration(
-//               gradient: LinearGradient(
-//                 colors: [c1, c2],
-//                 begin: Alignment.topLeft,
-//                 end: Alignment.bottomRight,
-//               ),
-//             ),
-//             // subtle overlay to keep content readable
-//             child: Container(
-//               color: Colors.black.withOpacity(0.08),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -79,7 +13,7 @@ class _ThemedAnimatedBackgroundState extends State<ThemedAnimatedBackground>
   late final AnimationController _ctrl;
   final Random _rand = Random();
 
-  final int numIcons = 12; // number of floating icons
+  final int numIcons = 36; // number of floating icons
   final List<_FloatingIcon> _icons = [];
 
   @override
@@ -88,15 +22,52 @@ class _ThemedAnimatedBackgroundState extends State<ThemedAnimatedBackground>
     _ctrl = AnimationController(vsync: this, duration: const Duration(seconds: 12))
       ..repeat();
 
-    // Initialize floating icons with random properties
+      final List<IconData> possibleIcons = [
+      Icons.location_pin,
+      Icons.coffee,
+      Icons.nightlife,
+      Icons.fastfood,
+      Icons.explore,
+      Icons.shopping_bag,
+      Icons.local_hospital,
+      Icons.park,
+      Icons.attractions,
+      Icons.local_mall,
+      Icons.movie,
+      Icons.sports_soccer,
+      Icons.local_cafe,
+      Icons.local_bar,
+      Icons.local_dining,
+      Icons.local_florist,
+      Icons.local_gas_station,
+      Icons.local_hotel,
+      Icons.local_library,
+      Icons.local_pharmacy,
+      Icons.local_pizza,
+      Icons.local_taxi,
+      Icons.local_see,
+      Icons.local_shipping,
+      Icons.local_play,
+      Icons.local_convenience_store,
+      Icons.local_fire_department,
+      Icons.local_police,
+      Icons.local_post_office,
+      Icons.local_drink,
+    ];
+
+    // 2. Use the list to select a random icon for each instance
     for (int i = 0; i < numIcons; i++) {
+      // Select a random index from the list
+      final int randomIndex = _rand.nextInt(possibleIcons.length);
+      
       _icons.add(_FloatingIcon(
-        icon: _rand.nextBool() ? Icons.location_pin : Icons.coffee,
+        // Use the random icon from the list
+        icon: possibleIcons[randomIndex], 
         x: _rand.nextDouble(),
         y: _rand.nextDouble(),
         size: 20 + _rand.nextDouble() * 20,
-        speed: 0.2 + _rand.nextDouble() * 0.3,
-        opacity: 0.1 + _rand.nextDouble() * 0.3,
+        speed: 0.4 + _rand.nextDouble() * 0.3,
+        opacity: 0.4 + _rand.nextDouble() * 0.3,
       ));
     }
   }
@@ -119,7 +90,7 @@ class _ThemedAnimatedBackgroundState extends State<ThemedAnimatedBackground>
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFFa8edea), Color(0xFFfed6e3)],
+                    colors: [Color.fromARGB(255, 117, 182, 179), Color.fromARGB(255, 186, 216, 104)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -136,7 +107,7 @@ class _ThemedAnimatedBackgroundState extends State<ThemedAnimatedBackground>
                     child: Icon(
                       f.icon,
                       size: f.size,
-                      color: Colors.white.withOpacity(0.7),
+                      color: const Color.fromARGB(255, 163, 144, 144).withOpacity(0.7),
                     ),
                   ),
                 );
