@@ -16,8 +16,9 @@ node_modules/
 .env
 npm-debug.log
 .DS_Store
-mock-backend/node_modules/
-mock-backend/.env
+backend/node_modules/
+backend/.env
+backend/serviceAccountKey.json
 
 # IntelliJ related
 *.iml

@@ -1,6 +1,5 @@
-// backend/routes/search.js
 import express from "express";
-import { askOllama } from "../services/ollama_service.js"; // ✅ correct
+import { askOllama } from "../services/ollama_service.js";
 
 const router = express.Router();
 
@@ -14,16 +13,10 @@ router.post("/", async (req, res) => {
     }
 
     const aiResponse = await askOllama(query);
-    console.log("🤖 Ollama response:", aiResponse);
+    console.log("🤖 Ollama structured response:", aiResponse);
 
-    res.json({
-      results: [
-        {
-          name: "AI Response",
-          summary: aiResponse,
-        },
-      ],
-    });
+    // ✅ Pass the results array directly to frontend
+    res.json(aiResponse);
   } catch (error) {
     console.error("❌ /search error:", error.message);
     res.status(500).json({ error: "Failed to fetch AI response" });
@@ -31,5 +24,3 @@ router.post("/", async (req, res) => {
 });
 
 export default router;
-
-

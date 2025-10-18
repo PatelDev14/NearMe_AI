@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onSearch;
 
   const SearchBar({Key? key, required this.controller, required this.onSearch}) : super(key: key);
+
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  bool _showLetsGoText = true;
+
+  void _handleSearch() {
+    setState(() {
+      _showLetsGoText = false;
+    });
+    widget.onSearch();
+    widget.controller.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +40,7 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              controller: controller,
+              controller: widget.controller,
               textInputAction: TextInputAction.search,
               decoration: const InputDecoration(
                 hintText: 'Search places, activities and more...',
@@ -34,7 +49,7 @@ class SearchBar extends StatelessWidget {
                 isDense: true,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               ),
-              onSubmitted: (_) => onSearch(),
+              onSubmitted: (_) => _handleSearch(),
             ),
           ),
           const SizedBox(width: 8),
@@ -42,7 +57,7 @@ class SearchBar extends StatelessWidget {
             color: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: InkWell(
-              onTap: onSearch,
+              onTap: _handleSearch,
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -61,12 +76,16 @@ class SearchBar extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.search, color: Colors.white, size: 16),
-                    SizedBox(width: 5),
-                    Text('Let\'s Go!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                    const Icon(Icons.search, color: Colors.white, size: 16),
+                    const SizedBox(width: 5),
+                    if (_showLetsGoText)
+                      const Text(
+                        'Let\'s Go!',
+                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10),
+                      ),
                   ],
                 ),
               ),

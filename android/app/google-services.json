@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070587279819",
+    "project_id": "nearme-ai-8123d",
+    "storage_bucket": "nearme-ai-8123d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070587279819:android:7b28af9519982edfda9e4e",
+        "android_client_info": {
+          "package_name": "com.example.nearme_ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2GFXiQDKm9bWO0HvKpMnh4moDHAFHHsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
